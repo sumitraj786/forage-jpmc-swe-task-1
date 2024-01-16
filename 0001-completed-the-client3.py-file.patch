@@ -1,0 +1,42 @@
+From 2b57a893a596ac03e3173085052489bf93acedec Mon Sep 17 00:00:00 2001
+From: sumit raj <sumitrajsky00@gmail.com>
+Date: Wed, 17 Jan 2024 01:09:36 +0530
+Subject: [PATCH] completed the client3.py file
+
+Successfully implemented the getRatio method
+---
+ client3.py | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/client3.py b/client3.py
+index 3fc09b7..ab0729f 100644
+--- a/client3.py
++++ b/client3.py
+@@ -41,8 +41,12 @@ def getDataPoint(quote):
+ 
+ def getRatio(price_a, price_b):
+     """ Get ratio of price_a and price_b """
+-    """ ------------- Update this function ------------- """
+-    return 1
++    if price_b == 0:
++        # Avoid division by zero
++        return "Undefined"
++    else:
++        ratio = price_a / price_b
++        return ratio
+ 
+ 
+ # Main
+@@ -56,4 +60,8 @@ if __name__ == "__main__":
+             stock, bid_price, ask_price, price = getDataPoint(quote)
+             print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+ 
+-        print("Ratio %s" % getRatio(price, price))
++        # Calculate the ratio using the last quote's price
++        last_quote = quotes[-1]
++        _, last_bid_price, _, last_price = getDataPoint(last_quote)
++        ratio = getRatio(last_price, last_bid_price)
++        print("Ratio %s" % ratio)
+-- 
+2.43.0.windows.1
+
